@@ -112,6 +112,8 @@ if os.path.exists(server_path):
         subprocess.call(['sudo','ln', '-s', config_file_path, destination_config_file_path])
         # copyfile(os.path.join(folder_path,config_file_name), os.path.join(server_path,config_file_name))
         print("########### Done ###########")
+        print(" *** Please open file [hosts] present in [/etc/] durectory\nand add 127.0.0.1    server name and save***")
+
     except expression as identifier:
         print("Unknown error occured.... Aborting setup...")
     
@@ -119,6 +121,12 @@ else:
     print("[/etc/nginx/sites-available/] folder is not available")
     print("Please check NGINX install properly..")
     print("Aborting setup...Thanks")
+
+print("Please wait.... Restarting and Reloading nginx server...")
+subprocess.call(['sudo','service','nginx','restart'])
+subprocess.call(['sudo','service','nginx','reload'])
+print("Your web application is ready to use")
+print("Open browser and enter in addressbar ",server_name)
 
 # sudo vim /etc/hosts
 # sudo service nginx reload
