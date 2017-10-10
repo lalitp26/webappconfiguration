@@ -123,26 +123,3 @@ else:
 # sudo vim /etc/hosts
 # sudo service nginx reload
 # sudo service nginx restart
-# g = Github("lalitp777","@")
-
-# org = g.get_organization('medipta');
-
-# rp = org.get_repo('medipta/bloodbank')
-# pr = rp.get_pull(1)
-# print(pr.user.login)
-
-# for r in org.get_repos('private'):
-#     print(r.full_name)
-
-# teams = org.get_teams()
-# for t in teams:
-#     for m in t.get_members():
-#         print(m.login)
-
-
-# rep = org.get_repo("sampleRepo")
-# pr = rep.get_pull(1)
-# print("Author %s" %pr.user.login)
-
-# for repo in g.get_user().get_repos():
-#     print repo.name
