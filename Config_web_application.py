@@ -10,6 +10,18 @@ folder_path = None
 os_platform = sys.platform
 current_working_dir = None
 home_dir = os.path.expanduser('~')
+remote_url = None
+branch_name = None
+
+commands = {
+    "nginxversion":['nginx', '-V'],
+    "installnginx":['sudo', 'pip', 'install', 'nginx'],
+    "gitinit":['git','init'],
+    "addupstream":['git','remote','add','upstream', remote_url],
+    "pullupstream":['git','pull','upstream',branch_name],
+    "nginxrestart":['sudo','service','nginx','restart'],
+    "nginxreload":['sudo','service','nginx','reload']
+}
 
 confi_file = '''
             server {0}
