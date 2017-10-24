@@ -1,11 +1,15 @@
 
 import os
 import subprocess, shutil
+import sys
 # from github import Github
 
 status_flag = False
 folder_name = None
 folder_path = None
+os_platform = sys.platform
+current_working_dir = None
+home_dir = os.path.expanduser('~')
 
 confi_file = '''
             server {0}
@@ -22,7 +26,11 @@ confi_file = '''
             {3}'''
 
 print("Plase wait Checking prerequisite...")
-current_working_dir = os.getcwd()
+if 'linux' in os_platform:
+    os.chdir(os.path.join(os.sep, home_dir, 'Documents'))
+    current_working_dir = os.getcwd()
+
+    
 
 try:
     print("Checking for NGINX server")
@@ -77,10 +85,11 @@ while status_flag:
         print("Done")
         remote_url = input("Enter remote url to add Upstream:- ")
         print("Please wailt.... adding updtream url")
-        subprocess.call(['git','remote','add','upstream','https://github.com/medipta/webcode'])
+        subprocess.call(['git','remote','add','upstream', remote_url])
         print("Done")
-        print("Please wait.... Pulling master repo...")
-        subprocess.call(['git','pull','upstream','master'])
+        branch_name = input("Enter branch name :- ")
+        print("Please wait.... Pulling %s repo..." %(branch_name))
+        subprocess.call(['git','pull','upstream',branch_name])
         print("Project created successfully......")
         break
     except expression as identifier:
@@ -100,8 +109,8 @@ print("Enter server name Ex. lab.medipta.org or lab.medipta.com etc...")
 server_name = input()
 server_path = "/etc/nginx/conf.d"
 config_file_name = folder_name + ".conf"
-config_file_path = os.join(folder_path, config_file_name)
-destination_config_file_path = os.join(server_path, config_file_name)
+config_file_path = os.path.join(os.sep, folder_path, config_file_name)
+destination_config_file_path = os.path.join(os.sep, server_path, config_file_name)
 
 from shutil import copyfile
 if os.path.exists(server_path):
